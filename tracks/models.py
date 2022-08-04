@@ -15,6 +15,6 @@ class Track(models.Model):
     targetTest = models.CharField(max_length=128)
     body = models.TextField()
     imageUrl = models.CharField(max_length=128)
-    likes = models.ManyToManyField(User, related_name='like_posts', blank =True)
+    followers = models.ManyToManyField(User, related_name='follow_tracks', blank =True)
     feedbacks = models.ManyToManyField(User, related_name='user_feedbacks', blank=True)
     published_date = models.DateTimeField(default=timezone.now)

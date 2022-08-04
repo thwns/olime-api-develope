@@ -1,0 +1,4 @@
+django>=3.1.6
+djangorestframework>=3.12.2
+django-filter>=22.1
+drf-spectacular>=0.15,<0.16

@@ -9,7 +9,7 @@ class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
         fields = ("pk", "profile", "trackName", "body", "imageUrl", "published_date", "subjectMajor",
-                  "subjectSub", "targetGrade", "targetTest", "likes", "feedbacks")
+                  "subjectSub", "targetGrade", "targetTest", "followers", "feedbacks")
 
 
 class TrackCreateSerializer(serializers.ModelSerializer):

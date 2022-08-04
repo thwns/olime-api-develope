@@ -17,7 +17,7 @@ class TrackViewSet(viewsets.ModelViewSet):
     queryset = Track.objects.all()
     permission_classes = [CustomReadOnly]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['leader', 'subjectMajor', 'subjectSub', 'targetGrade','targetTest', 'likes']
+    filterset_fields = ['leader', 'subjectMajor', 'subjectSub', 'targetGrade','targetTest', 'followers']
     filter_backends = [filters.SearchFilter]
     search_fields = ['trackName', 'body']
 
@@ -33,12 +33,15 @@ class TrackViewSet(viewsets.ModelViewSet):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def like_track(request, pk):
+def follow_track(request, pk):
     track = get_object_or_404(Track, pk=pk)
-    if request.user in track.likes.all():
-        track.likes.remove(request.user)
+    profile = get_object_or_404(Profile, user=request.user)
+    if request.user in track.followers.all():
+        track.followers.remove(request.user)
+        profile.followed_tracks.remove(track.pk)
     else:
-        track.likes.add(request.user)
+        track.followers.add(request.user)
+        profile.followed_tracks.add(track.pk)
 
     return Response({'status': 'ok'})
     

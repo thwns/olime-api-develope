@@ -14,6 +14,7 @@ class Profile(models.Model):
     position = models.CharField(max_length=128)
     subjects = models.CharField(max_length=128)
     imageUrl = models.CharField(max_length=128)
+    followed_tracks = models.ManyToManyField("tracks.Track", related_name='followed_tracks', blank =True)
 
 
 @receiver(post_save, sender=User)
