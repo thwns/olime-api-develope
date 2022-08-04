@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 from rest_framework import viewsets
 from rest_framework.decorators import api_view, permission_classes
@@ -17,6 +18,8 @@ class TrackViewSet(viewsets.ModelViewSet):
     permission_classes = [CustomReadOnly]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['leader', 'subjectMajor', 'subjectSub', 'targetGrade','targetTest', 'likes']
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['trackName', 'body']
 
     def get_serializer_class(self):
         if self.action == 'list' or 'retrieve':
