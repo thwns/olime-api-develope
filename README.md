@@ -3,3 +3,4 @@
 # erase pycache
 
 # python manage.py migrate --fake myApp zero
+# insomnia
